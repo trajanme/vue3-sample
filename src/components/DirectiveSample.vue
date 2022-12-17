@@ -29,8 +29,26 @@ export default {
           baseLink: "",
           createdAt: "2022-12-11(Sun) 23:00",
           updatedAt: "2022-12-11(Sun) 23:00"
-        }
+        },
+        { 
+          id: 3,
+          th: 15,
+          genre: "レジェンド",
+          cc: "アイゴレx3、アチャx5",
+          memo: "15初めての自作配置。意外と防衛率が高い",
+          usedCount: 10,
+          defensedCount: 7,
+          imgUrl: "",
+          baseLink: "",
+          createdAt: "2022-12-11(Sun) 23:00",
+          updatedAt: "2022-12-11(Sun) 23:00"
+        },
       ]
+    }
+  },
+  computed: {
+    basedFilteringTH9 () {
+      return this.bases.filter(b => b.th == 9);
     }
   }
 }
