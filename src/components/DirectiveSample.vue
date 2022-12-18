@@ -15,7 +15,8 @@ export default {
           memo: "フリスタカップ用に作成した配置。罠で入りを崩すコンセプト",
           usedCount: 3,
           defensedCount: 2,
-          imgUrl: "",
+          storageAt: { player: "七代虎徹", type: "野良", index: 3 },
+          imgUrl: "https://firebasestorage.googleapis.com/v0/b/baselog-42f72.appspot.com/o/IMG_5737.PNG?alt=media&token=e43918c4-9059-4448-a624-157223e2236c",
           baseLink: "https://twitter.com/ktt5102",
           storageLimit: "2022-12-19 23:00:00",
         },
@@ -27,7 +28,8 @@ export default {
           memo: "R杯用に作成した配置。広めに作成してドラがバラけたり黒爆弾で減るように意識した。",
           usedCount: 2,
           defensedCount: 2,
-          imgUrl: "",
+          storageAt: { player: "八代虎徹", type: "対戦", index: 2 },
+          imgUrl: "https://firebasestorage.googleapis.com/v0/b/baselog-42f72.appspot.com/o/IMG_4172.png?alt=media&token=65e977e5-3d94-4c03-af4a-e8d1f9680db2",
           baseLink: "https://twitter.com/clashofclansjp",
           storageLimit: "2022-12-19 23:30:00"
         },
@@ -39,7 +41,8 @@ export default {
           memo: "15初めての自作配置。意外と防衛率が高い",
           usedCount: 10,
           defensedCount: 7,
-          imgUrl: "",
+          storageAt: { player: "初代虎徹", type: "野良", index: 2 },
+          imgUrl: "https://firebasestorage.googleapis.com/v0/b/baselog-42f72.appspot.com/o/IMG_5838.PNG?alt=media&token=c8ef612e-4f62-4e05-9068-100a802e3556",
           baseLink: "https://twitter.com/ktt5102",
           storageLimit: "2022-12-18 21:00:00"
         },
@@ -76,9 +79,17 @@ export default {
 
 <template>
   <div class="directiveSample">
-    <h1>配置図鑑</h1>
+    <h1>Base Log</h1>
     <ul v-for="b in bases">
-      <li>TH:{{ b.th }}, 種別:{{ b.genre }}, 援軍:{{ b.cc }}, メモ:{{ b.memo }}, リンク: <a v-bind:href="b.baseLink">click</a>, 期限まで: {{ getCountdown(b.storageLimit) }}</li>
+      <li><img class="baseImage" :src="b.imgUrl"/>TH:{{ b.th }}, 種別:{{ b.genre }}, 援軍:{{ b.cc }}, メモ:{{ b.memo }}, 保存先: {{ b.storageAt }}, リンク: <a v-bind:href="b.baseLink">click</a>, 期限まで: {{ getCountdown(b.storageLimit) }}</li>
     </ul>
   </div>
 </template>
+
+<style>
+img.baseImage {
+  width: 100%;
+  object-fit: cover;
+}
+</style>
+
