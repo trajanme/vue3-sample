@@ -1,8 +1,11 @@
 <script>
+import moment from "moment"
+
 export default {
   name: "DirectiveSample",
   data() {
     return {
+      currentTime: moment().format("YYYY-mm-dd hh:mm"),
       bases: [
         { 
           id: 1,
@@ -13,9 +16,8 @@ export default {
           usedCount: 3,
           defensedCount: 2,
           imgUrl: "",
-          baseLink: "https://link.clashofclans.com/en?action=OpenLayout&id=TH5%3AHV%3AAAAAKwAAAAIC-eLZwru3BgS7p13XOEK4",
-          createdAt: "2022-12-11(Sun) 23:00",
-          updatedAt: "2022-12-11(Sun) 23:00"
+          baseLink: "https://twitter.com/ktt5102",
+          storageLimit: "2022-12-19 23:00:00",
         },
         { 
           id: 2,
@@ -26,9 +28,8 @@ export default {
           usedCount: 2,
           defensedCount: 2,
           imgUrl: "",
-          baseLink: "",
-          createdAt: "2022-12-11(Sun) 23:00",
-          updatedAt: "2022-12-11(Sun) 23:00"
+          baseLink: "https://twitter.com/clashofclansjp",
+          storageLimit: "2022-12-19 23:30:00"
         },
         { 
           id: 3,
@@ -39,16 +40,35 @@ export default {
           usedCount: 10,
           defensedCount: 7,
           imgUrl: "",
-          baseLink: "",
-          createdAt: "2022-12-11(Sun) 23:00",
-          updatedAt: "2022-12-11(Sun) 23:00"
+          baseLink: "https://twitter.com/ktt5102",
+          storageLimit: "2022-12-18 21:00:00"
         },
       ]
     }
   },
+  created()  {
+    setInterval(() => {
+      this.currentTime = moment().format("YYYY-MM-DD HH:mm:ss"); 
+    }, 1000)
+  }, 
   computed: {
     basedFilteringTH9 () {
       return this.bases.filter(b => b.th == 9);
+    }
+  },
+  methods: {
+    getDiffSecond(fromTime, toTime) {
+      let timeFrom = moment(fromTime);
+      let timeTo = moment(toTime);
+      return timeFrom.diff(timeTo, "seconds");
+    },  
+    getCountdown(anUpdatedAt) {
+      let countDown = this.getDiffSecond(anUpdatedAt, this.currentTime);
+      if (countDown > 0) {
+        return countDown + "秒";
+      } else {
+        return "期限切れ";
+      }
     }
   }
 }
@@ -56,10 +76,9 @@ export default {
 
 <template>
   <div class="directiveSample">
-    <h1>Directive Sample</h1>
-    <h3>for-sample</h3>
+    <h1>配置図鑑</h1>
     <ul v-for="b in bases">
-      <li> id:{{ b.id }}, TH:{{ b.th }}, 種別:{{ b.genre }}, 援軍:{{ b.cc }}, メモ:{{ b.memo }}</li>
+      <li>TH:{{ b.th }}, 種別:{{ b.genre }}, 援軍:{{ b.cc }}, メモ:{{ b.memo }}, リンク: <a v-bind:href="b.baseLink">click</a>, 期限まで: {{ getCountdown(b.storageLimit) }}</li>
     </ul>
   </div>
 </template>
