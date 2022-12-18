@@ -1,11 +1,9 @@
 <script setup>
 import DirectiveSample from './components/DirectiveSample.vue';
-import MomentSampleVue from './components/MomentSample.vue';
 </script>
 
 <template>
   <main>
-    <MomentSampleVue />
     <DirectiveSample />
   </main>
 </template>
